@@ -15,11 +15,9 @@ db.Country = require('./country.model.js')(sequelize, DataTypes);
 db.State = require('./state.model.js')(sequelize, DataTypes);
 db.City = require('./city.model.js')(sequelize, DataTypes);
 
-// Associations
-db.Country.hasMany(db.State, { foreignKey: 'country_id' });
-db.State.belongsTo(db.Country);
-
-db.State.hasMany(db.City, { foreignKey: 'state_id' });
-db.City.belongsTo(db.State);
+// Call association hooks
+Object.values(db).forEach(model => {
+  if (model.associate) model.associate(db);
+});
 
 module.exports = db;
