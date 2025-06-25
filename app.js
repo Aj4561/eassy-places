@@ -8,6 +8,6 @@ app.use(express.urlencoded({ extended: true }));
 
 require('./routes/country.routes')(app);
 require('./routes/state.routes')(app);
-require('./routes/city.routes')(app);
+// require('./routes/city.routes')(app);
 
 module.exports = app;

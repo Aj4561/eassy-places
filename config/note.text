@@ -1,0 +1,53 @@
+script to run pgAdmin easily
+
+nano ~/start_pgadmin.sh
+
+
+
+#!/bin/bash
+source ~/pgadmin-env/bin/activate
+cd ~/pgadmin-env/pgadmin4
+PYTHONPATH=. python ~/pgadmin-env/lib/python3.6/site-packages/pgadmin4/pgAdmin4.py
+
+
+
+chmod +x ~/start_pgadmin.sh
+
+
+~/start_pgadmin.sh
+
+
+
+-----------------------------------------------------------------------------------------
+
+sudo lsof -i :5050
+python3   12345   ajay   5u  IPv4  123456   0t0  TCP localhost:5050 (LISTEN)
+kill -9 12345
+~/start_pgadmin.sh
+
+
+
+-------------------------------------------------------------------------------------------
+
+
+Create the Database First
+Run this command:  npx sequelize-cli db:create
+
+// This uses config/config.json to create the easy-places DB.
+
+Then Run Migration:   npx sequelize-cli db:migrate
+
+
+STEP 1: Create Seeder Files
+
+npx sequelize-cli seed:generate --name seed-countries
+npx sequelize-cli seed:generate --name seed-states
+npx sequelize-cli seed:generate --name seed-cities
+
+
+STEP 2: Add Data to Each File
+Example: seed-countries.js
+
+
+
+npx sequelize-cli db:seed:all
